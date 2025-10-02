@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.venv/
+
+# Data & models (do not commit large files)
+src/datasets/*
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+.env/
+
+# Logs and cache
+*.log
+wandb/
+runs/
+
+# Large data / weights
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# OS / IDE
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Outputs (keep only needed results)
+outputs/vis/yolov8_qr/train_batch*.jpg
+outputs/vis/yolov8_qr/val_batch*.jpg
+outputs/vis/yolov8_qr/*.csv
+outputs/vis/*

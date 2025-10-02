@@ -1,0 +1,5 @@
+train: src/datasets/train/images
+val: src/datasets/test/images
+
+nc: 1
+names: ['qrcode']
