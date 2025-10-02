@@ -17,7 +17,6 @@ def main():
     args = parse_args()
     print(f"Starting training with data={args.data}, model={args.model}, epochs={args.epochs}")
     model = YOLO(args.model)
-    # train; ultralytics handles logging and saving best.pt
     model.train(
         data=args.data,
         epochs=args.epochs,

@@ -8,7 +8,7 @@ def shorten_image_id(image_id: str) -> str:
     """
     if "_jpg" in image_id:
         return image_id.split("_jpg")[0]
-    return image_id  # fallback if unexpected format
+    return image_id  
 
 
 def convert_submission(input_path: str, output_path: str):
@@ -22,7 +22,6 @@ def convert_submission(input_path: str, output_path: str):
     with open(input_path, "r") as f:
         data = json.load(f)
 
-    # Handle both list of records and single record cases
     if isinstance(data, list):
         for record in data:
             record["image_id"] = shorten_image_id(record["image_id"])

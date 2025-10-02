@@ -9,7 +9,6 @@ def list_images(folder, exts=('.jpg','.jpeg','.png')):
     return imgs
 
 def yolo_txt_to_xyxy(line, img_w, img_h):
-    # YOLO format: class x_center y_center width height (all normalized)
     parts = line.strip().split()
     if len(parts) < 5:
         return None
@@ -35,12 +34,6 @@ def load_yolo_labels_for_image(label_path, img_w, img_h):
     return bboxes
 
 def convert_preds_to_submission(preds_results, out_json_path, save_crops_dir=None, decode_callback=None):
-    """
-    preds_results: list of dicts, each dict for an image containing:
-       - 'image_path': path
-       - 'boxes': list of [x1,y1,x2,y2]
-    decode_callback (optional): function(crop_image_np) -> decoded_string or None
-    """
     submission = []
     os.makedirs(os.path.dirname(out_json_path) or '.', exist_ok=True)
     if save_crops_dir:
@@ -64,7 +57,6 @@ def convert_preds_to_submission(preds_results, out_json_path, save_crops_dir=Non
                 if val:
                     entry["value"] = val
             qrs.append(entry)
-            # optionally save crop
             if save_crops_dir:
                 crop_file = os.path.join(save_crops_dir, f"{img_id}_{idx}.png")
                 cv2.imwrite(crop_file, img[y1:y2, x1:x2])
