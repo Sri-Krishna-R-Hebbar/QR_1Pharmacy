@@ -1,8 +1,9 @@
 # QR_1Pharmacy
 
-This repository implements a YOLOv8-based pipeline for detecting QR codes in images.
+This repository implements a YOLOv8-based pipeline for detecting QR codes in images. It includes training, inference, and evaluation scripts, along with utilities for visualization. It supports both:
 
-It includes training, inference, and evaluation scripts, along with utilities for visualization.
+- **Stage 1 (Detection)**: Detect all QR codes in the image.
+- **Stage 2 (Bonus - Decoding + Classification)**: Decode QR values and classify them by type.
 
 ---
 
@@ -45,7 +46,6 @@ The project follows a standard structure for machine learning tasks:
     ├── requirements.txt
 
     └── README.md
-
 
 ## 🚀 Getting Started
 
@@ -117,13 +117,23 @@ python evaluate.py --weights outputs/yolov8_qr/weights/best.pt --data data.yml
 
 ### 7. Inference
 
+##### Stage 1 (Detection Only)
+
 Run inference on new images using the trained weights.
 
 ```bash
 python infer.py --weights outputs/yolov8_qr/weights/best.pt --source src/datasets/test/images --output outputs/submission_1.json --save-vis outputs/vis
 ```
+Output → `outputs/submission_detection_1.json`
 
-### 8. Conversion of Submission in the Submission format (optional)
+##### Stage 2 (Decoding + Classification)
+
+```bash
+python infer.py --source src/datasets/test/images --output outputs/submission_decoding_2.json --weights outputs/yolov8_qr/weights/best.pt --decode
+```
+Output → `outputs/submission_decoding_2.json`
+
+### 8. Conversion of Submission 1 in the given Submission format (optional)
 
 Converts the JSON output from infer.py into required submission format (change the paths as needed in src/utils/convert_submission.py)
 
@@ -131,17 +141,18 @@ Converts the JSON output from infer.py into required submission format (change t
 python src/utils/convert_submission.py
 ```
 
-
 ## 📊 Results
 
 Key results are saved in `outputs/vis/yolov8_qr/`:
 
 * **Training curves:** `outputs/yolov8_qr/results.png`
 * **Confusion matrix:** `outputs/yolov8_qr/confusion_matrix.png`
-* **Final submission JSON (for Task 1):** `outputs/submission_detection1.json`
+* **Final submission JSON (for Detection Only - Task 1):** `outputs/submission_detection1.json`
+* **Final submission JSON (for Decoding + Classification Only - Bonus):** `outputs/submission_decoding_2.json`
 
 ## 📦 Submission
 
 The final submission JSON file for evaluation is included in this repository structure:
 
-`outputs/submission_detection1.json`
+Detection (Mandatory) - `outputs/submission_detection1.json`
+Decoding + Classification (Bonus) - `outputs/submission_decoding_2.json`
